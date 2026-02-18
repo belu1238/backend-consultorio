@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",  //una vvez que se compile, los archivos se guardan en la carpeta dist
+        "rootDir": "./src",  //la carpeta de origen es src
+        "lib": ["ESNext"],
+        "target": "ESNext",
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext", 
+        "strict": false,
+        "sourceMap": true, //para generar los archivos .map
+        "esModuleInterop": true, //para poder importar módulos de Node.js
+        "declaration": true, //para generar los archivos .d.ts (definicion)
+        "experimentalDecorators": true, //para poder usar decoradores
+        "emitDecoratorMetadata": true, //para poder usar metadatos de decoradores
+    },
+    "include": [
+        "src/**/*.ts"  //incluir todos los archivos dentro de la carpeta src
+    ]
+}
