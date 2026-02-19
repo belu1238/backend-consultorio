@@ -3,6 +3,7 @@ import db from './config/db'
 import lugarRoutes from './routes/lugarRoutes'
 import pacienteRoutes from './routes/pacienteRoutes'
 import estadoPagoRoutes from './routes/estadoPagoRoutes'
+import authRoutes from './routes/authRotes'
 import { corsConfig } from './config/cors'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -29,5 +30,6 @@ app.use(express.json())
 app.use('/api/lugares', lugarRoutes)
 app.use('/api/pacientes', pacienteRoutes)
 app.use('/api/estado-pago', estadoPagoRoutes)
+app.use('/api/auth', authRoutes)
 
 export default app

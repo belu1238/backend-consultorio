@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { body, param } from "express-validator"; 
 import { handleInputErrors } from "../middleware/validation"; 
-import { PatientController } from "../controllers/PatientController"; 
+import { PatientController } from "../controllers/PacienteController"; 
 import { validacionLugar } from "../middleware/lugarAtencion"; 
 import { SesionController } from "../controllers/SesionController";
 

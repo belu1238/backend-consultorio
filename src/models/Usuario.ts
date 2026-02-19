@@ -21,6 +21,11 @@ class Usuario extends Model {
     @Column({
         type: DataType.STRING(100),      
     })
+    declare apellido: string
+
+    @Column({
+        type: DataType.STRING(100),      
+    })
     declare email: string
 
     @Column({

@@ -2,7 +2,7 @@ import { Router } from "express";
 import { LugarController } from "../controllers/LugarController"; 
 import { body, param } from "express-validator"; 
 import { handleInputErrors } from "../middleware/validation"; 
-import { PatientController } from "../controllers/PatientController"; 
+import { PatientController } from "../controllers/PacienteController"; 
 import { validacionLugar } from "../middleware/lugarAtencion"; 
 
 const router = Router()
