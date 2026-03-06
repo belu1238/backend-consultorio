@@ -4,8 +4,11 @@ import { body, param } from "express-validator";
 import { handleInputErrors } from "../middleware/validation"; 
 import { PatientController } from "../controllers/PacienteController"; 
 import { validacionLugar } from "../middleware/lugarAtencion"; 
+import { authenticate } from "../middleware/Auth";
 
 const router = Router()
+
+router.use(authenticate)
 
 router.post('/' , 
     body('nombre') .notEmpty().withMessage('El nombre es obligatorio'), 

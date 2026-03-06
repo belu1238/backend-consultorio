@@ -5,6 +5,7 @@ import { checkPassword, hashPassword } from "../utils/auth";
 import { generateToken } from "../utils/token";
 import { AuthEmail } from "../emails/AuthEmail";
 import { generateJWT } from "../utils/jwt";
+import Rol from "../models/Rol";
 export class UsuarioController {
     static registrarUsuario = async(req: Request, res: Response) => {
         try{
@@ -16,11 +17,19 @@ export class UsuarioController {
             res.status(409).json({msg: error.message}) // 409 conflicto
             return
         }
+        // asignar el rol de usuario por defecto
+        const rolAdmin = await Rol.findOne({where: {nombre: 'admin'}})
+        if(!rolAdmin){
+            const error = new Error('Rol de admin no encontrado')
+            res.status(500).json({msg: error.message}) 
+            return
+        }
 
         //segundo crear el usuario
         const usuario = new Usuario(req.body)
         usuario.password = await hashPassword(password)
         usuario.token = generateToken()
+        usuario.rol_id = rolAdmin.id
         await usuario.save()
 
         await AuthEmail.enviarConfirmacionRegistro({

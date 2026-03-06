@@ -7,6 +7,7 @@ import authRoutes from './routes/authRotes'
 import { corsConfig } from './config/cors'
 import cors from 'cors'
 import morgan from 'morgan'
+import { limiter } from './config/limiter'
 
 const app = express()
 
@@ -26,6 +27,8 @@ export async function connectDB() {
 
 connectDB()
 app.use(express.json())
+
+app.use(limiter) // aplicar el limitador a todas las rutas
 
 app.use('/api/lugares', lugarRoutes)
 app.use('/api/pacientes', pacienteRoutes)

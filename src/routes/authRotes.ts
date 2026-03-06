@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { handleInputErrors } from "../middleware/validation";
 import { UsuarioController } from "../controllers/UsuarioController";
+import { authenticate } from "../middleware/Auth";
 
 const router = Router()
 
@@ -25,5 +26,55 @@ router.post('/login',
         .notEmpty().withMessage('La contraseña es obligatoria'),
     handleInputErrors,
     UsuarioController.loginUsuario
+)
+
+router.post('/confirm-account',
+    body('token')
+        .notEmpty()
+        .isLength({min: 6, max: 6})
+        .withMessage('Token no válido'),
+    handleInputErrors,    
+    UsuarioController.confirmarCuenta
+)
+
+router.post('/forgot-password',
+    body('email')
+        .isEmail().withMessage('El email no es válido'),
+    handleInputErrors,
+    UsuarioController.recuperarContraseña
+)
+
+router.post('/validate-token',
+    body('token')
+        .notEmpty()
+        .isLength({min: 6, max: 6})
+        .withMessage('Token no válido'),
+    handleInputErrors,
+    UsuarioController.validarToken
+)
+
+router.post('/reset-password/:token',
+    param('token')
+        .notEmpty()
+        .isLength({min: 6, max: 6})
+        .withMessage('Token no válido'),
+    body('password')
+        .isLength({min: 8}).withMessage('La contraseña debe tener al menos 8 caracteres'),
+    handleInputErrors,
+    UsuarioController.resetearContraseña
+)
+
+router.get('/user', 
+    authenticate,
+    UsuarioController.usuario)
+
+router.post('/update-password',
+    authenticate,
+    body('actualPassword')
+        .notEmpty().withMessage('La contraseña es obligatoria'),
+    body('password')
+        .isLength({min: 8}).withMessage('La contraseña debe tener al menos 8 caracteres'),
+    handleInputErrors,
+    UsuarioController.actualizarContraseña
 )
 export default router
