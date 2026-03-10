@@ -15,6 +15,12 @@ router.post('/register',
         .isEmail().withMessage('El email no es válido'),
     body('password')
         .isLength({min: 8}).withMessage('La contraseña debe tener al menos 8 caracteres'),
+    body('password_confirmation').custom((value, {req}) => {
+        if(value !== req.body.password){  // value es lo que ingresa el usuario y req se puede utilizar para comparar con otros campos
+            throw new Error('Las contraseñas no coinciden')
+        }
+        return true 
+    }),    
     handleInputErrors,
     UsuarioController.registrarUsuario
 ) 
@@ -35,6 +41,13 @@ router.post('/confirm-account',
         .withMessage('Token no válido'),
     handleInputErrors,    
     UsuarioController.confirmarCuenta
+)
+
+router.post('/request-code',
+    body('email')
+        .isEmail().withMessage('El email no es válido'),
+    handleInputErrors,
+    UsuarioController.confirmacionRegistro
 )
 
 router.post('/forgot-password',
