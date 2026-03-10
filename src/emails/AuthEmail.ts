@@ -16,7 +16,7 @@ export class AuthEmail {
             <h1>Hola ${usuario.nombre}! has creado tu cuenta en PsicoAgenda
             ya esta casi lista. </h1>
             <p>Visita el siguiente enlace para confirmar tu cuenta:</p>
-            <a href="#">Confirmar cuenta </a>
+            <a href="${process.env.FRONTEND_URL}/auth/confirm-account">Confirmar cuenta </a>
             <p>Ingresa el siguiente codigo: <b>${usuario.token}</b></p> 
             `
         })
