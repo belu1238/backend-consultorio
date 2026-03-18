@@ -31,7 +31,7 @@ export class AuthEmail {
             html: `
             <h1>Hola ${usuario.nombre}! has solicitado recuperar tu contraseña en PsicoAgenda</h1>
             <p>Visita el siguiente enlace para recuperar tu contraseña:</p>
-            <a href="#">Recuperar contraseña </a>
+            <a href="${process.env.FRONTEND_URL}/auth/new-password">Recuperar contraseña </a>
             <p>Ingresa el siguiente codigo: <b>${usuario.token}</b></p> 
             `
         })

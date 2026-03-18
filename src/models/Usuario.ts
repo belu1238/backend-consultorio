@@ -28,7 +28,7 @@ class Usuario extends Model {
 
     @AllowNull(false)
     @Unique(true)
-    @Column({
+    @Column({ 
         type: DataType.STRING(100),      
     })
     declare email: string

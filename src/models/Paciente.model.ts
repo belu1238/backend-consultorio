@@ -1,10 +1,11 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany} from 'sequelize-typescript'
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany, AllowNull} from 'sequelize-typescript'
 import LugarAtencion from './Lugar.model'
 import Sesion from './Sesion.model'
+import Tutor from './Tutor'
 
 @Table({
     tableName: 'pacientes',
-    timestamps: false
+    timestamps: true
 })
 
 class Paciente extends Model {
@@ -15,6 +16,7 @@ class Paciente extends Model {
     })
     declare id: number
 
+    @AllowNull(false)
     @Column({
         type: DataType.STRING(100),      
     })
@@ -35,76 +37,20 @@ class Paciente extends Model {
     })
     declare fecha_nacimiento: Date
 
+    @ForeignKey(() => Tutor)
     @Column({
-        type: DataType.INTEGER
-    })
-    declare edad: number
-
-    @Column({
-        type: DataType.STRING(100)
-    })
-    declare nombre_madre: string
-
-    @Column({
-        type: DataType.STRING
-    })
-    declare nombre_padre: string
-
-    @Column({
-        type: DataType.STRING(100)
-    })
-    declare obra_social: string
-
-    @Column({
-        type: DataType.STRING(50)
-    })
-    declare numero_beneficiario: string
-
-    @Column({
-        type: DataType.INTEGER
-    })
-    declare cuit_obra_social: number
-
-    @Column({
-        type: DataType.STRING(100)
-    })
-    declare situacion_frente_iva: string
-
-    @Column({
-        type: DataType.TEXT
-    })
-    declare diagnostico: string
-
-    @Column({
-        type: DataType.STRING(100)
-    })
-    declare medicacion: string
-
-    @Column({
-        type: DataType.STRING
-    })
-    declare colegio: string
-
-    @Column({
-        type: DataType.STRING(100)
-    })
-    declare horario_presupuesto: string 
-
-    @Column({
-        type: DataType.STRING(150)
-    })
-    declare profesionales: string
-
-    @Column({
-        type: DataType.STRING(300)
-    })
-    declare historia_clinica: string
+    type: DataType.INTEGER
+    }) 
+    declare IdTutor: number
 
     @ForeignKey(() => LugarAtencion)
     @Column({
     type: DataType.INTEGER
     })
-    declare lugar_id: number
+    declare IdLugar: number
+
+    @BelongsTo(() => Tutor) //define que cada paciente pertenece a un tutor.
+    declare tutor: Tutor
 
     @BelongsTo(() => LugarAtencion) //define que cada paciente pertenece a un lugar.
     declare lugar: LugarAtencion
