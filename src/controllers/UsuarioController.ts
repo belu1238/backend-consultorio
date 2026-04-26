@@ -18,7 +18,7 @@ export class UsuarioController {
             return
         }
         // asignar el rol de usuario por defecto
-        const rolAdmin = await Rol.findOne({where: {nombre: 'user'}})
+        const rolAdmin = await Rol.findOne({where: {nombre: 'admin'}})
         if(!rolAdmin){
             const error = new Error('Rol de admin no encontrado')
             res.status(500).json({error: error.message}) 
@@ -70,7 +70,8 @@ export class UsuarioController {
         }
 
         const token = generateJWT(usuario.id)
-        res.send('Inicio de sesión exitoso')
+        res.json(token)
+        // res.send('Inicio de sesión exitoso')
         } catch (error) {
             res.status(500).json({error: 'Error al iniciar sesión'})
         }
@@ -148,14 +149,14 @@ export class UsuarioController {
     }
 
     static usuario = async(req: Request, res: Response) => {
-        res.json(req.user)
+        res.json(req.usuario)
     }
 
     //usuario ya autenticado
     static actualizarContraseña = async(req: Request, res: Response) => {
         const {actualPassword, password} = req.body
         // buscar el usuario 
-        const { id } = req.user 
+        const { id } = req.usuario 
         const usuario = await Usuario.findByPk(id)
 
         const contraseñaCorrecta = await checkPassword(actualPassword, usuario.password)

@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
 import Paciente from "../models/Paciente.model";
+
 export class PatientController {
     static crearPaciente = async(req: Request, res: Response) => {
-        const paciente = new Paciente(req.body)
-
         try {
-            await paciente.save()
-            res.send('Paciente creado correctamente')
+        const paciente = await Paciente.create(req.body)
+        paciente.IdUsuario = req.usuario.id
+        
+        await paciente.save()
+        res.send('Paciente creado correctamente')
         } catch(error) {
-            console.log(error)
+             res.status(500).json({error: 'Error al crear el paciente'})
         }
     }
 

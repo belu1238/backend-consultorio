@@ -1,11 +1,13 @@
 import type { Request, Response, NextFunction } from 'express'
 import jwt from "jsonwebtoken";
 import Usuario from '../models/Usuario';
+import Paciente from '../models/Paciente.model';
 
 declare global {
     namespace Express {
         interface Request {
-            user?: Usuario
+            usuario?: Usuario,
+            paciente?: Paciente
         }
     }
 }
@@ -29,7 +31,7 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
             
             if(typeof decoded === 'object' && decoded.id ){
-                req.user = await Usuario.findByPk(decoded.id, {
+                req.usuario = await Usuario.findByPk(decoded.id, {
                     attributes: ['id', 'nombre', 'email']
                 })
                 next()

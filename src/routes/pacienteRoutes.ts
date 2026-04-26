@@ -5,11 +5,12 @@ import { PatientController } from "../controllers/PacienteController";
 import { validacionLugar } from "../middleware/lugarAtencion"; 
 import { SesionController } from "../controllers/SesionController";
 import { authenticate } from "../middleware/Auth";
+import { authorizeRole } from "../middleware/Role";
 
 const router = Router()
 
 router.use(authenticate) // Todas las rutas de pacientes requieren autenticación
-
+router.use(authorizeRole('admin')) // Solo los usuarios con rol 'admin' pueden acceder a las rutas de pacientes
 router.get('/dashboard', 
     handleInputErrors,
     SesionController.obtenerResumenSesiones
@@ -36,7 +37,6 @@ router.put('/:pacienteId',
     param('pacienteId').isInt().withMessage('El id del paciente no es valido'),
     body('nombre').notEmpty().withMessage('El nombre del paciente es obligatorio'), 
     body('apellido').notEmpty().withMessage('El apellido del paciente es obligatorio'), 
-    body('edad').notEmpty().withMessage('La edad del paciente es obligatorio'), 
     handleInputErrors, 
     PatientController.editarPaciente
 )

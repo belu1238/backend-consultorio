@@ -7,6 +7,8 @@ import Paciente from "../models/Paciente.model";
 export class SesionController {
     static crearSesion = async(req: Request, res: Response) => {
         const sesion = new Sesion(req.body)
+        sesion.IdUsuario = req.usuario.id
+        
         try{
             await sesion.save()
             res.send('Sesión creada correctamente')

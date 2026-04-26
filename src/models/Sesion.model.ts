@@ -1,6 +1,7 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo} from 'sequelize-typescript'
 import Paciente from './Paciente.model'
 import EstadoPago from './EstadoPago.model'
+import Usuario from './Usuario'
 
 @Table({
     tableName: 'sesiones',
@@ -54,6 +55,13 @@ class Sesion extends Model {
         type: DataType.TEXT
     })
     declare evaluacion: string
+
+    @ForeignKey(() => Usuario) 
+    @Column({ type: DataType.INTEGER })
+    declare IdUsuario: number
+
+    @BelongsTo(() => Usuario) 
+    declare usuario: Usuario
 
     @BelongsTo(() => EstadoPago) //define que cada sesion pertenece a un estado de pago.s
     declare estado_pago: EstadoPago

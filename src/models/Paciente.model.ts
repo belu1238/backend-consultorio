@@ -2,6 +2,7 @@ import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany, AllowNu
 import LugarAtencion from './Lugar.model'
 import Sesion from './Sesion.model'
 import Tutor from './Tutor'
+import Usuario from './Usuario'
 
 @Table({
     tableName: 'pacientes',
@@ -37,17 +38,21 @@ class Paciente extends Model {
     })
     declare fecha_nacimiento: Date
 
-    @ForeignKey(() => Tutor)
-    @Column({
-    type: DataType.INTEGER
-    }) 
-    declare IdTutor: number
+    @ForeignKey(() => Usuario) 
+    @Column({ type: DataType.INTEGER, field: 'IdUsuario' })
+    declare IdUsuario: number
 
+    
+    @ForeignKey(() => Tutor)
+    @Column({ type: DataType.INTEGER })
+    declare IdTutor: number
+    
     @ForeignKey(() => LugarAtencion)
-    @Column({
-    type: DataType.INTEGER
-    })
+    @Column({ type: DataType.INTEGER })
     declare IdLugar: number
+    
+    @BelongsTo(() => Usuario)
+    declare usuario: Usuario
 
     @BelongsTo(() => Tutor) //define que cada paciente pertenece a un tutor.
     declare tutor: Tutor

@@ -45,7 +45,7 @@ router.post('/:lugarId/pacientes',
     body('nombre').notEmpty().withMessage('El nombre del paciente es obligatorio'), 
     body('apellido').notEmpty().withMessage('El apellido del paciente es obligatorio'), 
     body('dni').notEmpty().withMessage('El dni del paciente es obligatorio'),
-    body('lugar_id').notEmpty().withMessage('El lugar de atencion es obligatorio'),
+    body('IdLugar').notEmpty().withMessage('El lugar de atencion es obligatorio'),
     handleInputErrors, 
     LugarController.createPatient 
 )

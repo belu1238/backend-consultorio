@@ -1,5 +1,7 @@
-import { Table, Column, Model, DataType, Default, Unique, AllowNull, BelongsTo, ForeignKey} from 'sequelize-typescript'
+import { Table, Column, Model, DataType, Default, Unique, AllowNull, BelongsTo, ForeignKey, HasMany} from 'sequelize-typescript'
 import Rol from './Rol'
+import Paciente from './Paciente.model'
+import Sesion from './Sesion.model'
 
 @Table({
     tableName: 'usuarios',
@@ -57,7 +59,19 @@ class Usuario extends Model {
     declare rol_id: number
 
     @BelongsTo(() => Rol)
-    declare rol: Rol 
+    declare rol: Rol  
+
+    @HasMany(() => Paciente, {
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+    })
+    declare pacientes: Paciente[]
+
+    @HasMany(() => Sesion, {
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+    })
+    declare sesiones: Sesion[]
 
 }
 

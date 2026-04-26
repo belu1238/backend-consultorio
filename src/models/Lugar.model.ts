@@ -3,6 +3,7 @@ import Paciente from './Paciente.model'
 
 @Table({
     tableName: 'lugares',
+    timestamps: false,
 })
 
 class LugarAtencion extends Model {
