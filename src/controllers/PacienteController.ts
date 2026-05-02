@@ -1,25 +1,31 @@
 import { Request, Response } from "express";
 import Paciente from "../models/Paciente.model";
+import { crearPacienteService, obtenerPacientesPorLugarService } from "../services/PacienteService";
 
 export class PatientController {
     static crearPaciente = async(req: Request, res: Response) => {
+        const {lugarId} = req.params
+        const IdUsuario = req.usuario.id
+
         try {
-        const paciente = await Paciente.create(req.body)
-        paciente.IdUsuario = req.usuario.id
-        
-        await paciente.save()
-        res.send('Paciente creado correctamente')
-        } catch(error) {
-             res.status(500).json({error: 'Error al crear el paciente'})
+            await crearPacienteService(req.body, +lugarId, IdUsuario)
+
+            res.send('Paciente creado correctamente')
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({error: 'Error al crear el paciente.'})
         }
     }
 
-    static obtenerPacientes = async(req: Request, res: Response) => {
+    static obtenerPacientesPorLugar = async(req: Request, res: Response) => {
+        const IdUsuario = req.usuario.id
+        const lugarId = req.params.lugarId
         try{
-            const pacientes = await Paciente.findAll({})
+            const pacientes = await obtenerPacientesPorLugarService(+lugarId, IdUsuario)
             res.json(pacientes)
         }  catch(error) {
             console.log(error)
+            res.status(404).json({ error: error.message });
         }
     }
 

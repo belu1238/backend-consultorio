@@ -2,7 +2,6 @@ import { Router } from "express";
 import { body, param } from "express-validator"; 
 import { handleInputErrors } from "../middleware/validation"; 
 import { PatientController } from "../controllers/PacienteController"; 
-import { validacionLugar } from "../middleware/lugarAtencion"; 
 import { SesionController } from "../controllers/SesionController";
 import { authenticate } from "../middleware/Auth";
 import { authorizeRole } from "../middleware/Role";
@@ -16,22 +15,18 @@ router.get('/dashboard',
     SesionController.obtenerResumenSesiones
 )
 
-router.post('/', 
-    body('nombre').notEmpty().withMessage('El nombre del paciente es obligatorio'),
-    body('apellido').notEmpty().withMessage('El apellido del paciente es obligatorio'),
+router.post('/:lugarId/pacientes', 
+    body('nombre').notEmpty().withMessage('El nombre del paciente es obligatorio'), 
+    body('apellido').notEmpty().withMessage('El apellido del paciente es obligatorio'), 
     body('dni').notEmpty().withMessage('El dni del paciente es obligatorio'),
-    body('fecha_nacimiento').notEmpty().withMessage('La fecha de nacimiento del paciente es obligatorio'),
-    handleInputErrors,
+    body('IdLugar').notEmpty().withMessage('El lugar de atencion es obligatorio'),
+    handleInputErrors, 
     PatientController.crearPaciente
 )
 
-router.get('/', PatientController.obtenerPacientes)
+router.get('/:lugarId/pacientes', PatientController.obtenerPacientesPorLugar) 
 
-router.get('/:pacienteId',
-    param('pacienteId').isInt(),
-    handleInputErrors,
-    PatientController.obtenerPacientePorId
-);
+router.get('/:lugarId/pacientes/:pacienteId', PatientController.obtenerPacientePorId)
 
 router.put('/:pacienteId', 
     param('pacienteId').isInt().withMessage('El id del paciente no es valido'),

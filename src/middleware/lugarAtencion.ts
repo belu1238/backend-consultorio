@@ -26,3 +26,29 @@ export async function validacionLugar(req: Request, res: Response, next: NextFun
         res.status(500).json({error: 'Hubo un error'})
     }
 }
+
+export async function accesoPaciente(req: Request, res: Response, next: NextFunction) {
+    const { pacienteId } = req.params
+
+        try{
+            const paciente = await Paciente.findByPk(pacienteId)
+
+            if(!paciente){
+                const error = new Error('Paciente no encontrado.')
+                res.status(404).json({error: error.message})
+                return
+            }
+
+            if(paciente.IdUsuario !== req.usuario.id){
+            const error = new Error('Acción no autorizada')
+            res.status(401).json({error: error.message})
+            return
+            }
+            req.paciente = paciente
+    next()
+    }catch(error){
+            console.log(error)
+    }
+}
+
+
