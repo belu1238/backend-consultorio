@@ -32,11 +32,12 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
             
             if(typeof decoded === 'object' && decoded.id ){
                 req.usuario = await Usuario.findByPk(decoded.id, {
-                    attributes: ['id', 'nombre', 'email']
+                    attributes: ['id', 'nombre', 'email', 'rol_id']
                 })
                 next()
             }
         } catch (error) {
+            console.log(error)
             res.status(500).json({message: 'Token no válido'})
         }
 }

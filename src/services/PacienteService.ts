@@ -24,3 +24,33 @@ export const obtenerPacientesPorLugarService = async(lugarId: number, IdUsuario:
             return pacientes
 } 
 
+export const obtenerPacientePorIdService = async(IdUsuario: number, pacienteId: number, lugarId: number) => {
+    const paciente = await Paciente.findOne({
+        where: {
+            IdUsuario: IdUsuario,
+            id: pacienteId,
+            IdLugar: lugarId
+        }
+    })
+
+    if (!paciente) {
+        throw new Error('Paciente no encontrado en este lugar de atención.');
+    }
+    return paciente;
+}
+
+export const editarPacienteService = async(IdUsuario: number, pacienteId: number, lugarId: number, data: any) => {
+    const paciente = await Paciente.findOne({
+        where: {
+            id: pacienteId,
+            IdUsuario: IdUsuario,
+            IdLugar: lugarId
+        }
+    })
+            if(!paciente){
+                throw new Error('Paciente no encontrado.');
+            }
+    await paciente.update(data)
+    return paciente
+}
+

@@ -31,7 +31,7 @@ app.use(express.json())
 app.use(limiter) // aplicar el limitador a todas las rutas
 
 app.use('/api/lugares', lugarRoutes)
-app.use('/api/pacientes', pacienteRoutes)
+app.use('/api', pacienteRoutes)
 app.use('/api/estado-pago', estadoPagoRoutes)
 app.use('/api/auth', authRoutes)
 

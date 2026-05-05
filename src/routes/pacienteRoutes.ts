@@ -9,7 +9,7 @@ import { authorizeRole } from "../middleware/Role";
 const router = Router()
 
 router.use(authenticate) // Todas las rutas de pacientes requieren autenticación
-router.use(authorizeRole('admin')) // Solo los usuarios con rol 'admin' pueden acceder a las rutas de pacientes
+router.use(authorizeRole('1')) // Solo los usuarios con rol 'admin' pueden acceder a las rutas de pacientes
 router.get('/dashboard', 
     handleInputErrors,
     SesionController.obtenerResumenSesiones
@@ -19,7 +19,6 @@ router.post('/:lugarId/pacientes',
     body('nombre').notEmpty().withMessage('El nombre del paciente es obligatorio'), 
     body('apellido').notEmpty().withMessage('El apellido del paciente es obligatorio'), 
     body('dni').notEmpty().withMessage('El dni del paciente es obligatorio'),
-    body('IdLugar').notEmpty().withMessage('El lugar de atencion es obligatorio'),
     handleInputErrors, 
     PatientController.crearPaciente
 )
@@ -28,19 +27,13 @@ router.get('/:lugarId/pacientes', PatientController.obtenerPacientesPorLugar)
 
 router.get('/:lugarId/pacientes/:pacienteId', PatientController.obtenerPacientePorId)
 
-router.put('/:pacienteId', 
+router.put('/:lugarId/pacientes/:pacienteId', 
     param('pacienteId').isInt().withMessage('El id del paciente no es valido'),
     body('nombre').notEmpty().withMessage('El nombre del paciente es obligatorio'), 
     body('apellido').notEmpty().withMessage('El apellido del paciente es obligatorio'), 
     handleInputErrors, 
     PatientController.editarPaciente
 )
-
-router.delete('/:pacienteId',
-    param('pacienteId').isInt().withMessage('El id del paciente no es valido'),
-    handleInputErrors,
-    PatientController.eliminarPaciente
-);
 
 
 /** SESIONES */

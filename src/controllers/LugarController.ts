@@ -45,23 +45,4 @@ export class LugarController {
         }      
     }
 
-    static obtenerPacientesPorLugar = async(req: Request, res: Response) => {
-        try{
-            const pacientes = await Paciente.findAll({
-                where: {
-                    IdLugar: req.lugar.id,
-                    IdUsuario: req.usuario.id
-                }
-            })
-            if(!pacientes){
-                const error = new Error('Pacientes no encontrados.')
-                res.status(404).json({error: error.message})
-                return
-            }
-            res.json(pacientes)
-        } catch(error){
-            res.status(500).json({error: 'Error al obtener los pacientes del lugar.'})
-        }
-    }
-
 }

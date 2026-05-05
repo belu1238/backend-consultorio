@@ -5,8 +5,9 @@ export const authorizeRole = (...rolesPermitidos: string[]) => {
             const error = new Error('No autorizado')
             return res.status(401).json({msg: error.message})
         }
+        const rolId = req.usuario.get('rol_id')
 
-        if(!rolesPermitidos.includes(req.usuario.rol.toString())){
+        if(!rolesPermitidos.includes(rolId.toString())){
             const error = new Error('No tienes permiso para acceder a este recurso')
             return res.status(403).json({msg: error.message})
         }
