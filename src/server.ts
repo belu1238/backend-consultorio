@@ -2,8 +2,9 @@ import express from 'express'
 import db from './config/db'
 import lugarRoutes from './routes/lugarRoutes'
 import pacienteRoutes from './routes/pacienteRoutes'
+import tutorRoutes from './routes/tutorRoutes'
 import estadoPagoRoutes from './routes/estadoPagoRoutes'
-import authRoutes from './routes/authRotes'
+import authRoutes from './routes/authRoutes'
 import { corsConfig } from './config/cors'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -30,9 +31,10 @@ app.use(express.json())
 
 app.use(limiter) // aplicar el limitador a todas las rutas
 
-app.use('/api/lugares', lugarRoutes)
-app.use('/api', pacienteRoutes)
-app.use('/api/estado-pago', estadoPagoRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/lugares', lugarRoutes)
+app.use('/api/pacientes', tutorRoutes)
+app.use('/api/estado-pago', estadoPagoRoutes)
+app.use('/api', pacienteRoutes)
 
 export default app

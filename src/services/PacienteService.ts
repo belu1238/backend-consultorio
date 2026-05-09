@@ -1,13 +1,14 @@
 import Paciente from "../models/Paciente.model"
+import Tutor from "../models/Tutor"
 
 export const crearPacienteService = async(data: any, lugarId: number, IdUsuario: number) => {
     const paciente = await Paciente.create({
                 ...data,
                 IdLugar: lugarId,
-                IdUsuario: IdUsuario
+                IdUsuario: IdUsuario,
+                IdTutor: data.IdTutor
             })
             
-            await paciente.save() 
             return paciente// devuelvo el paciente creado para que el controller pueda usarlo
 }
 
@@ -30,7 +31,10 @@ export const obtenerPacientePorIdService = async(IdUsuario: number, pacienteId: 
             IdUsuario: IdUsuario,
             id: pacienteId,
             IdLugar: lugarId
-        }
+        },
+        include: [
+            {model: Tutor}
+        ]
     })
 
     if (!paciente) {
