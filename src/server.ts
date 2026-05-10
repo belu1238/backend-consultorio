@@ -5,6 +5,7 @@ import pacienteRoutes from './routes/pacienteRoutes'
 import tutorRoutes from './routes/tutorRoutes'
 import estadoPagoRoutes from './routes/estadoPagoRoutes'
 import authRoutes from './routes/authRoutes'
+import obraSocialRoutes from './routes/obraSocialRoutes'
 import { corsConfig } from './config/cors'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -36,5 +37,6 @@ app.use('/api/lugares', lugarRoutes)
 app.use('/api/pacientes', tutorRoutes)
 app.use('/api/estado-pago', estadoPagoRoutes)
 app.use('/api', pacienteRoutes)
+app.use('/api/obra-social', obraSocialRoutes)
 
 export default app

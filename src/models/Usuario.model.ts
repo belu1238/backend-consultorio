@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, Default, Unique, AllowNull, BelongsTo, ForeignKey, HasMany} from 'sequelize-typescript'
-import Rol from './Rol'
+import Rol from './Rol.model'
 import Paciente from './Paciente.model'
 import Sesion from './Sesion.model'
 

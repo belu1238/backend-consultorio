@@ -1,5 +1,7 @@
+import ObraSocial from "../models/ObraSocial.model"
 import Paciente from "../models/Paciente.model"
-import Tutor from "../models/Tutor"
+import PacienteObraSocial from "../models/PacienteObraSocial.model"
+import Tutor from "../models/Tutor.model"
 
 export const crearPacienteService = async(data: any, lugarId: number, IdUsuario: number) => {
     const paciente = await Paciente.create({
@@ -33,7 +35,8 @@ export const obtenerPacientePorIdService = async(IdUsuario: number, pacienteId: 
             IdLugar: lugarId
         },
         include: [
-            {model: Tutor}
+            {model: Tutor},
+            {model: PacienteObraSocial, include: [ObraSocial]} // para incluir la información de la obra social asociada al paciente
         ]
     })
 

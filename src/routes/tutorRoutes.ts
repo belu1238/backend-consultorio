@@ -13,5 +13,12 @@ router.post('/:pacienteId/tutor',
     TutorController.crearTutor
 )
 
+router.put('/:tutorId/tutor',
+    body('nombre').optional().notEmpty().withMessage('El nombre del tutor no puede estar vacío'),
+    body('apellido').optional().notEmpty().withMessage('El apellido del tutor no puede estar vacío'),
+    handleInputErrors,
+    TutorController.editarTutor
+)
+
 
 export default router

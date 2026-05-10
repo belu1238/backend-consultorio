@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, Default, Unique, AllowNull, HasMany} from 'sequelize-typescript'
-import Usuario from './Usuario'
+import Usuario from './Usuario.model'
 
 @Table({
     tableName: 'roles',

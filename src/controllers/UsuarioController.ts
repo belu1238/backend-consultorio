@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
-import Usuario from "../models/Usuario";
+import Usuario from "../models/Usuario.model";
 
 import { checkPassword, hashPassword } from "../utils/auth";
 import { generateToken } from "../utils/token";
 import { AuthEmail } from "../emails/AuthEmail";
 import { generateJWT } from "../utils/jwt";
-import Rol from "../models/Rol";
+import Rol from "../models/Rol.model";
 export class UsuarioController {
     static registrarUsuario = async(req: Request, res: Response) => {
         try{

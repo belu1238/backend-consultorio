@@ -1,6 +1,4 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany, AllowNull} from 'sequelize-typescript'
-import LugarAtencion from './Lugar.model'
-import Sesion from './Sesion.model'
 import Paciente from './Paciente.model'
 
 @Table({

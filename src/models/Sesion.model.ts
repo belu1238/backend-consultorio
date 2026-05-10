@@ -1,7 +1,7 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo} from 'sequelize-typescript'
 import Paciente from './Paciente.model'
 import EstadoPago from './EstadoPago.model'
-import Usuario from './Usuario'
+import Usuario from './Usuario.model'
 
 @Table({
     tableName: 'sesiones',

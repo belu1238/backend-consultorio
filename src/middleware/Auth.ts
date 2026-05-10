@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express'
 import jwt from "jsonwebtoken";
-import Usuario from '../models/Usuario';
+import Usuario from '../models/Usuario.model';
 import Paciente from '../models/Paciente.model';
 
 declare global {
