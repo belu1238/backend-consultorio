@@ -6,6 +6,7 @@ import tutorRoutes from './routes/tutorRoutes'
 import estadoPagoRoutes from './routes/estadoPagoRoutes'
 import authRoutes from './routes/authRoutes'
 import obraSocialRoutes from './routes/obraSocialRoutes'
+import pacienteObraSocialRoutes from './routes/pacienteObraSocialRoutes'
 import { corsConfig } from './config/cors'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -34,9 +35,10 @@ app.use(limiter) // aplicar el limitador a todas las rutas
 
 app.use('/api/auth', authRoutes)
 app.use('/api/lugares', lugarRoutes)
-app.use('/api/pacientes', tutorRoutes)
-app.use('/api/estado-pago', estadoPagoRoutes)
 app.use('/api', pacienteRoutes)
+app.use('/api/pacientes', tutorRoutes)
 app.use('/api/obra-social', obraSocialRoutes)
+app.use('/api/paciente', pacienteObraSocialRoutes)
+app.use('/api/estado-pago', estadoPagoRoutes)
 
 export default app
