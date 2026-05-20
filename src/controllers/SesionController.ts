@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import Sesion from "../models/Sesion.model";
 import EstadoPago from "../models/EstadoPago.model";
-import { Model, Op } from "sequelize";
+import { Op } from "sequelize";
 import Paciente from "../models/Paciente.model";
 
 export class SesionController {

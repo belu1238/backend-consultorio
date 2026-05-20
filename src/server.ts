@@ -7,6 +7,9 @@ import estadoPagoRoutes from './routes/estadoPagoRoutes'
 import authRoutes from './routes/authRoutes'
 import obraSocialRoutes from './routes/obraSocialRoutes'
 import pacienteObraSocialRoutes from './routes/pacienteObraSocialRoutes'
+import tipoEspecialidadRoutes from './routes/tipoEspecialidadRoutes'
+import especialistaRoutes from './routes/especialistaRoutes'
+import pacienteEspecialistaRoutes from './routes/pacienteEspecialistaRoutes'
 import { corsConfig } from './config/cors'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -39,6 +42,9 @@ app.use('/api', pacienteRoutes)
 app.use('/api/pacientes', tutorRoutes)
 app.use('/api/obra-social', obraSocialRoutes)
 app.use('/api/paciente', pacienteObraSocialRoutes)
+app.use('/api/tipo-especialidad', tipoEspecialidadRoutes)
+app.use('/api/especialistas', especialistaRoutes)
+app.use('/api/paciente-especialista', pacienteEspecialistaRoutes)
 app.use('/api/estado-pago', estadoPagoRoutes)
 
 export default app
