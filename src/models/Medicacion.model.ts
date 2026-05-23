@@ -25,6 +25,11 @@ class Medicacion extends Model {
 
     @BelongsTo(() => Paciente)
     declare paciente: Paciente
+
+    @Column({
+        type: DataType.DATE
+    })
+    declare fechaRegistro: Date
 }
 
 export default Medicacion

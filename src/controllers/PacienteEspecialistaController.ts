@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PacienteEspecialistaService } from "../services/PacienteEspecialistaService";
+import { CrearPacienteEspecialistaService } from "../services/PacienteEspecialistaService";
 export class PacienteEspecialistaController {
 
     static async crearPacienteEspecialista(req: Request, res: Response) {
@@ -7,7 +7,7 @@ export class PacienteEspecialistaController {
             const { IdPaciente } = req.params
             const { IdEspecialista, } = req.body
 
-            const pacienteEspecialista = await PacienteEspecialistaService(req.body, +IdPaciente, +IdEspecialista)
+            const pacienteEspecialista = await CrearPacienteEspecialistaService(req.body, +IdPaciente, +IdEspecialista)
             res.status(201).json({
                 message: "Paciente especialista creado correctamente",
                 data: pacienteEspecialista

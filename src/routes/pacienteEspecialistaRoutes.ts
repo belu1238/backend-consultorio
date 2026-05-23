@@ -4,7 +4,7 @@ import { handleInputErrors } from "../middleware/validation";
 import { PacienteEspecialistaController } from "../controllers/PacienteEspecialistaController";
 
 
-export const router = Router()
+const router = Router()
 
 router.post('/:IdPaciente',
     body('IdEspecialista').notEmpty().withMessage('El Id del especialista es obligatorio'),
