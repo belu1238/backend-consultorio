@@ -32,9 +32,9 @@ class ArchivoDiagnostico extends Model {
     declare url: string
 
     @Column({
-        type: DataType.DATE
+        type: DataType.DATEONLY
     })
-    declare createdAt: Date
+    declare fechaSubida: Date
 }
 
 export default ArchivoDiagnostico

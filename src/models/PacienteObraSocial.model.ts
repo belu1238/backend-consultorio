@@ -30,12 +30,12 @@ class PacienteObraSocial extends Model {
   declare numeroAfiliado: string
 
   @Column({
-    type: DataType.DATE,
+    type: DataType.DATEONLY,
   })
   declare fechaAlta: Date
 
   @Column({
-    type: DataType.DATE,
+    type: DataType.DATEONLY,
   })
   declare fechaBaja: Date
 

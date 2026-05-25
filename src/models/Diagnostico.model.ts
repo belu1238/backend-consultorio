@@ -23,7 +23,7 @@ class Diagnostico extends Model {
     declare paciente: Paciente
 
     @Column({
-        type: DataType.DATE
+        type: DataType.DATEONLY
     })
     declare fecha: Date
 
