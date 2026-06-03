@@ -71,6 +71,7 @@ export class UsuarioController {
 
         const token = generateJWT(usuario.id)
         res.json(token)
+        
         // res.send('Inicio de sesión exitoso')
         } catch (error) {
             res.status(500).json({error: 'Error al iniciar sesión'})

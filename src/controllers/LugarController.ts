@@ -8,7 +8,10 @@ export class LugarController {
     static crearLugares = async(req: Request, res: Response) => {
         try{
             const lugar = await crearLugaresService(req.body)
-            return res.status(201).json(lugar);
+            return res.status(201).json({
+                message: 'Lugar de atencion creado con exito',
+                data: lugar
+            });
         } catch(error){
             return res.status(400).json({error: error.message});
         }
