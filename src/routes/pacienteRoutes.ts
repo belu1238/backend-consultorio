@@ -9,7 +9,7 @@ import { authorizeRole } from "../middleware/Role";
 const router = Router()
 
 router.use(authenticate) // Todas las rutas de pacientes requieren autenticación
-router.use(authorizeRole('1')) // Solo los usuarios con rol 'admin' pueden acceder a las rutas de pacientes
+router.use(authorizeRole('2')) // Solo los usuarios con rol 'admin' pueden acceder a las rutas de pacientes
 router.get('/dashboard', 
     handleInputErrors,
     SesionController.obtenerResumenSesiones

@@ -13,6 +13,7 @@ import pacienteEspecialistaRoutes from './routes/pacienteEspecialistaRoutes'
 import medicacionRoutes from './routes/medicacionRoutes'
 import diagnosticoRoutes from './routes/diagnosticoRoutes'
 import archivoDiagnosticoRoutes from './routes/archivoDiagnosticoRoutes'
+import colegioRoutes from './routes/colegioRoutes'
 import { corsConfig } from './config/cors'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -47,6 +48,7 @@ app.use('/api/obra-social', obraSocialRoutes)
 app.use('/api/paciente', pacienteObraSocialRoutes)
 app.use('/api/tipo-especialidad', tipoEspecialidadRoutes)
 app.use('/api/especialistas', especialistaRoutes)
+app.use('/api/colegios', colegioRoutes)
 app.use('/api/paciente-especialista', pacienteEspecialistaRoutes)
 app.use('/api/medicacion', medicacionRoutes)
 app.use('/api/estado-pago', estadoPagoRoutes)

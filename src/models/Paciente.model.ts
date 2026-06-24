@@ -3,6 +3,7 @@ import LugarAtencion from './Lugar.model'
 import Sesion from './Sesion.model'
 import Tutor from './Tutor.model'
 import Usuario from './Usuario.model'
+import Colegio from './Colegio.model'
 
 @Table({
     tableName: 'pacientes',
@@ -38,16 +39,29 @@ class Paciente extends Model {
     })
     declare fecha_nacimiento: Date
 
+    @Column({
+        type: DataType.STRING(100)
+    })
+    declare horario_presupuesto
+
+    @Column({
+        type: DataType.STRING(255)
+    })
+    declare detalle_paciente
+
     @ForeignKey(() => Usuario) 
     @Column({ type: DataType.INTEGER, field: 'IdUsuario' })
     declare IdUsuario: number
 
+    @ForeignKey(() => Colegio)
+    @Column({ type: DataType.INTEGER })
+    declare IdColegio: number
     
     @ForeignKey(() => Tutor)
     @Column({ type: DataType.INTEGER })
     declare IdTutor: number
     
-    @ForeignKey(() => LugarAtencion)
+    @ForeignKey(() => LugarAtencion) 
     @Column({ type: DataType.INTEGER })
     declare IdLugar: number
     
